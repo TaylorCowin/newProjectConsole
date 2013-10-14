@@ -11,6 +11,7 @@ public class Main {
     public static ArrayList nameList = new ArrayList();
 
     public static void main(String[] args) throws IOException {
+        fileRead();
         askName();
     }
 
@@ -30,14 +31,23 @@ public class Main {
     }
 
     public static void fileWrite() throws IOException {
-        File file = new File("/%appdata%/JavaFiles/Taylor.txt");
-        if (!file.exists()) {
-            file.mkdirs();
+        File file = new File("C:/Users/Taylor/JavaFiles/", "taylor.txt");
+        else if (!file.exists()) {
             file.createNewFile();
         }
         FileOutputStream fileOut = new FileOutputStream(file);
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
         objOut.writeObject(nameList);
         fileOut.close();
+    }
+
+    public static void fileRead() {       //completely top of my head. no idea if this code works.
+        File file = new File("C:/Users/Taylor/JavaFiles/", "taylor.txt");
+        if (file.exists()) {
+            FileInputStream fileIn = new FileInputStream(file);
+            ObjectOutputStream objIn = new ObjectInputStream(fileIn);
+            System.out.println(objIn.readObject());
+            fileIn.close();
+        }
     }
 }
